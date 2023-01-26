@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8083932952140695"
+     crossorigin="anonymous"></script>
+    <title>REVERSING WRITEUP</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.105.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Karanbir Singh" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://thelinuxboy007.github.io/main.css" />
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLVHGT13XR"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-SLVHGT13XR', { 'anonymize_ip': false });
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Reverse Engineering"/>
+<meta name="twitter:description" content="Reverse Engineering Writeup"/>
+
+    <meta property="og:title" content="Reverse Engineering" />
+<meta property="og:description" content="Reverse Engineering Writeup" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://meowmeowattack.github.io/case-study/file-upload-attacks/" /><meta property="article:section" content="case-study" />
+<meta property="article:published_time" content="2023-01-23T14:47:58+13:00" />
+<meta property="article:modified_time" content="2023-01-23T14:47:58+13:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://thelinuxboy007.github.io/"><img class="app-header-avatar" src="https://tryhackme-images.s3.amazonaws.com/user-avatars/b959e5db0ac57201bb48c75c39ded6ce.jpg" alt="Karanbir Singh" /></a>
+      <span class="app-header-title">Karanbir Singh</span>
+      <nav class="app-header-menu">
+
+          <a class="app-header-menu-item" href="https://tryhackme.com/RamghariaSaab/badges/hacker-of-the-month">Monthly Hacker Award</a>
+             - 
+          
+          <a class="app-header-menu-item" href="https://tryhackme.com/p/RamghariaSaab">TryHackme</a>
+             - 
+          
+          <a class="app-header-menu-item" href="https://app.hackthebox.com/profile/780921">HackTheBox</a>
+             - 
+          
+          <a class="app-header-menu-item" href="https://instagram.com/karan._ramgharia_">Instagram</a>
+          -
+        <a class="app-header-menu-item" href="https://github.com/karanbir-singh001">GitHub</a>
+         - 
+        <a class="app-header-menu-item" href="https://www.cloudskillsboost.google/public_profiles/df407ae3-d3dc-4de6-84c5-5b34169033da">Google</a>
+         - 
+        <a class="app-header-menu-item" href="https://learn.microsoft.com/en-us/users/karanramgharia-8633">Microsoft</a>
+      </nav>
+
+      <p>Hii, I am Karanbir Singh. I like programming, CTFs, HACKING. I am interested in Purple Teaming i.e. RED TEAMING and BLUE TEAMING both.</p>
+      <a style="font-size: larger;" href="icc/index.html">Indian Cyber Club</a>
+      <ul>
+      <a style="font-size: larger;" href="backdoor/index.html"><strong>Admin Backdoor</strong></a>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <script src="/js/crypto-js.min.js"></script>
+      <script src="/js/dice.js"></script>
+      <h1 class ="post-title">Reverse Engineering Writeup</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jan 26, 2023
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          15 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="intro">What is Reverse Engineering?</h1>
+<p>Reverse engineering covers a broad range of areas, including decompiling and disassembling of executable files and libraries, and analysis of system data. In the field of computer security, reverse engineering is used to study malware activity and create tools to neutralize it.</p>
+<h1 id="Task 1">Task 1</h1>
+<pre tabindex="0"><code>line in IDA disassembler with password: 
+
+.text:0000000000001190 lea rax, aTh3l1nuxb0y ; "Th3L1NUXB0Y"
+</code></pre><p>Password :- <code>Th3L1NUXB0Y</code></p>
+<p> The second option is just check the strings :)
+</code></pre><h1 id="Task 2">Task 2</h1>
+<pre tabindex="0"><code>*argv[1] == 99 (99 equals to "c")
+argv[1][1] == 104 (104 equals to "h")
+argv[1][2] == 101 (101 equals to "e")
+argv[1][3] == 101 (101 equals to "e")
+argv[1][4] == 109 (109 equals to "m")
+argv[1][5] == 115 (115 equals to "s")
+</code></pre><p>Password :- <code>cheems</code></p>
+</code></pre><h1 id="using-fi">Task 3</h1>
+<pre tabindex="0"><code>if ( *argv[1] == 107 && argv[1][4] == 98 )
+{
+  puts("Flag{Flag_for_testing} ");
+  return 0;
+}
+</code></pre><p>This means that any word that you input must start with character having decimal value "107" and must end with character of decimal value "98" to print the flag.
+</p>
+</code></pre><h1 id="using-fi">Task 4</h1>
+</code></pre><p>After decompiling the binary :-</code></p>
+<pre tabindex="0"><code>if (param_1 == 2) {
+    sVar2 = strlen(*(char **)(param_2 + 8));
+    if (sVar2 < 10) {
+      puts("Come on now ...  you should expect better from us!");
+      uVar1 = 0xffffffff;
+    }
+    else {
+      sVar2 = strlen(*(char **)(param_2 + 8));
+      for (local_c = 0; local_c < (int)sVar2; local_c = local_c + 1) {
+        if ("HelloBoy?b"[local_c] + 2 != (int)*(char *)((long)local_c + *(long *)(param_2 + 8))) {
+          puts("Wrong Password!");
+          return 0xffffffff;
+        }
+      }
+</code></pre><p>So we found <code> "HelloBoy?b"</code>base string string, which is adding +2 chars at every at every single char.
+So it will be like this :- </code></p>
+<pre tabindex="0"><code>H: 72 + 2 = 74 = j
+e: 101 + 2 = 103 = *
+l: 108 + 2 = 110 = *
+l: 108 + 2 = 110 = *
+o: 111 + 2 = 113 = *
+B: 66 + 2 = 68 = *
+o: 111 + 2 = 113 = *
+y: 121 + 2 = 123 = *
+?: 63 + 2 = 65 = *
+b: 98 + 2 = 100 = d
+</code></pre><p>Password :- <code> j{**restriced**}d
+ </code></pre><h1 id="using-fi">Task 5</h1> 
+ </code></pre><p>After decompiling the binary :-</p>
+ <pre tabindex="0"><code>if (param_1 == 2) {
+    sVar2 = strlen(*(char **)(param_2 + 8));
+    if (sVar2 < 5) {
+      puts("Come on now ...  you should expect betTer from us!");
+      uVar1 = 0xffffffff;
+    }
+    else if ((uint)*(byte *)(*(long *)(param_2 + 8) + 2) -
+             (uint)*(byte *)(*(long *)(param_2 + 8) + 3) == 0x20) {
+      puts("Flag{} ");
+      uVar1 = 0;
+    }
+    else {
+      puts("IncorRect pasSword!");
+      uVar1 = 0xffffffff;
+    }
+  }
+  else {
+    puts("Please provide the secret pasSword!");
+    uVar1 = 0xffffffff;
+  }
+  </code></pre><p>As we can see it is subtracting the "third" and "fourth" character to get result 0x20 i.e. 32. So we can add use any character as third and fourth character in password whose result is 0x20 by subtracting their decimal values.
+</code></pre><h1 id="using-fi">Task 6</h1>
+</code></pre><p>After disassembling the binary :-</code></p>
+<pre tabindex="0"><code>.data:0000000000402026 passwd          db  73h ; s             
+.data:0000000000402027                 db  75h ; *
+.data:0000000000402028                 db  70h ; *
+.data:0000000000402029                 db  65h ; *
+.data:000000000040202A                 db  72h ; *
+.data:000000000040202B                 db  73h ; *
+.data:000000000040202C                 db  65h ; *
+.data:000000000040202D                 db  63h ; *
+.data:000000000040202E                 db  72h ; *
+.data:000000000040202F                 db  65h ; *
+.data:0000000000402030                 db  74h ; *
+</code></pre><p>The second option is to check the strings of binary</p>
+</code></pre><h1 id="using-fi">Task 7</h1>
+<p>For this code would be a string of exactly 16 characters, where every odd-indexed character has an ASCII value that is exactly 1 less than the corresponding even-indexed character. For example, "abcdefghijklmnop" would be a valid input because 'a' (ASCII value 97) is 1 less than 'b' (ASCII value 98), 'c' (ASCII value 99) is 1 less than 'd' (ASCII value 100), and so on.</p>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
