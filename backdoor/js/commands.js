@@ -1,7 +1,7 @@
 
 var password = "mrx";
 var tryhackme = "https://tryhackme.com/p/RamghariaSaab";
-var instagram = "https://www.instagram.com/karan._ramgharia_/";
+var instagram = "https://www.instagram.com/karan._ramgarhia._/";
 var github = "https://github.com/karanbir-singh001/";
 var hackthebox = "https://app.hackthebox.com/profile/780921";
 
