@@ -22,7 +22,7 @@ whoami = [
 social = [
   "<br>",
   'tryhackme      <a href="' + tryhackme + '" target="_blank">tryhackme/RamghariaSaab' + "</a>",
-  'instagram      <a href="' + instagram + '" target="_blank">instagram/karan._ramgharia_' + '</a>',
+  'instagram      <a href="' + instagram + '" target="_blank">instagram/karan._ramgarhia._' + '</a>',
   'github         <a href="' + github + '" target="_blank">github/karanbir-singh001' + "</a>",
   'hackthebox     <a href="' + hackthebox + '" target="_blank">app.hackthebox.com/profile/780921' + "</a>",
   "<br>"
